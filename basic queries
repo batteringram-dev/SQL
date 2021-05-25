@@ -1,0 +1,41 @@
+-- Basic Queires to get a specific information from a table.
+
+CREATE TABLE student (
+    student_id INT,
+    name VARCHAR(20),
+    major VARCHAR(20),
+    PRIMARY KEY(student_id)
+);
+
+
+INSERT INTO student VALUES(1, 'Jack', 'Biology');
+INSERT INTO student VALUES(2, 'Kate', 'Sociology');
+INSERT INTO student VALUES(3, 'Claire', 'Chemistry');
+INSERT INTO student VALUES(4, 'Jack', 'Biology');
+INSERT INTO student VALUES(5, 'Mike', 'Computer Science');
+
+SELECT student.name, student.major
+FROM student
+ORDER BY name;
+
+SELECT * 
+FROM student
+ORDER BY major, student_id;
+
+SELECT *
+FROM student
+LIMIT 2;
+
+SELECT *
+FROM student
+WHERE major = 'Biology' OR name = 'Kate';
+
+SELECT * 
+FROM student
+WHERE student_id <= 3 AND name <> 'Jack';
+
+SELECT *
+FROM student
+WHERE name IN ('Claire', 'Kate', 'Mike');
+-- IN sql function can be used to check if something specific is there in the table
+-- We can use the SELECT, WHERE, LIMITS etc to create a complex queries.
