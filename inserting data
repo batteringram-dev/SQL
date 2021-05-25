@@ -1,0 +1,11 @@
+CREATE TABLE student (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(20),
+    major VARCHAR(20)
+);
+
+SELECT * FROM student;
+
+ALTER TABLE student DROP COLUMN gpa;
+
+INSERT INTO student VALUES(4, 'Peter', "English");
