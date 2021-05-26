@@ -1,0 +1,25 @@
+-- Adding another branch into the branch table
+
+INSERT INTO branch VALUES(4, 'Buffalo', NULL, NULL);
+
+-- Join is used to combine rows from different table into one table based on the related column.
+-- Find all branches and names of their managers
+
+SELECT employee.emp_id, employee.first_name, branch.branch_name
+FROM employee
+JOIN branch
+ON employee.emp_id = branch.mgr_id;
+
+-- Left Join, when we use left join we include all of the rows from the left table
+
+SELECT employee.emp_id, employee.first_name, branch.branch_name
+FROM employee
+LEFT JOIN branch
+ON employee.emp_id = branch.mgr_id;
+
+-- Right join, same applies here
+
+SELECT employee.emp_id, employee.first_name, branch.branch_name
+FROM employee
+RIGHT JOIN branch
+ON employee.emp_id = branch.mgr_id;
