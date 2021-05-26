@@ -1,0 +1,27 @@
+-- Union function
+-- We can use union function to combine the results of multiple select statements into one
+-- When using Union we need to have same number of columns in the select statement
+-- When using Union we need to have similar datatypes. For example in the below code,
+-- "first_name" and "branch_name" both are strings and going to return strings.
+
+SELECT first_name
+FROM employee
+UNION
+SELECT branch_name
+FROM branch;
+
+-- Find a list of all client and branch supplier's name
+
+SELECT client_name, client.branch_id
+FROM client
+UNION
+SELECT supplier_name, branch_supplier.branch_id
+FROM branch_supplier;
+
+-- Find a list of all money spent or earned by the company
+
+SELECT salary 
+FROM employee
+UNION
+SELECT total_sales 
+FROM works_with;
