@@ -1,0 +1,26 @@
+-- Wildcards
+-- Find any client who are an LLC
+-- "%" sign comes under wildcard which means any number of characters can come before what you are trying to find in a table
+
+SELECT *
+FROM client
+WHERE client_name LIKE '%LLC';
+
+-- Find any branch suppliers who are in the label business
+
+SELECT *
+FROM branch_supplier
+WHERE supplier_name LIKE '% Label%';
+
+-- Find any employee born in october
+-- "_" the undersocre sign represents to one character
+
+SELECT *
+FROM employee
+WHERE birth_day LIKE '____-10%';
+
+-- Find any clients who are schools
+
+SELECT * 
+FROM client
+WHERE client_name LIKE '%school%';
