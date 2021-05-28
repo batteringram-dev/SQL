@@ -1,0 +1,53 @@
+-- Trigger, trigger is a block of sql code which will define a certain
+-- action should happen when a certain operation gets performed on a database.
+-- I could write a trigger which will tell mysql to do something when like an
+-- entry was added into a particular table in the database or when something gets deleted
+
+CREATE TABLE trigger_test(
+    message VARCHAR(100)
+);
+
+DELIMITER $$
+CREATE
+    TRIGGER my_trigger BEFORE INSERT 
+    ON employee
+    FOR EACH ROW BEGIN
+        INSERT INTO trigger_test VALUES('added new employee');
+    END$$
+DELIMITER ;  
+
+-- Usually mysql delimiters are ";" we use this to end off a sql command but 
+-- in trigger we can't use it to end off the trigger creation. So we create
+-- a new delimiter and after the trigger we can change it back to semicolon.
+-- Delimiter is not defined on the popsql so we can use the mysql command client.
+-- After triggering the trigger in mysql command client we can add another employee now and check.
+
+INSERT INTO employee
+VALUES(109, 'Oscar', 'Martinez', '1968-02-19', 'M', 69000, 106, 3);
+
+SELECT * FROM trigger_test
+
+-- Complexed Trigger
+
+DELIMITER $$
+CREATE
+    TRIGGER my_trigger2 BEFORE INSERT 
+    ON employee
+    FOR EACH ROW BEGIN
+         IF NEW.sex = 'M' THEN
+            INSERT INTO trigger_test VALUES('added male employee');
+         ELSEIF NEW.sex = 'F' THEN
+               INSERT INTO trigger_test VALUES('added female employee');
+         ELSE      
+               INSERT INTO trigger_test VALUES('added new employee');
+         END IF;
+    END$$
+DELIMITER ; 
+
+INSERT INTO employee
+VALUES(111, 'Pam', 'Beesly', '1988-02-19', 'F', 69000, 106, 3);
+
+SELECT * FROM trigger_test;
+
+-- We can also drop triggers by typing " DROP TRIGGER 'trigger name';" 
+-- in the mysql command client 
