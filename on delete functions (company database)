@@ -1,0 +1,42 @@
+-- On DELETE SET NULL
+-- Deleting foreign key relationships between tables
+-- on delete set null sets the value to NULL if if we delete an employee id
+-- and the employee associated to other branches with foreign keys. 
+
+CREATE TABLE branch(
+    branch_id INT PRIMARY KEY,
+    branch_name VARCHAR(40),
+    mgr_id INT,
+    mgr_start_date DATE,
+    FOREIGN KEY(mgr_id) REFERENCES employee(emp_id) ON DELETE SET NULL
+);
+
+DELETE FROM employee
+WHERE employee.emp_id = 102;
+
+SELECT *
+FROM branch;
+
+SELECT *
+FROM employee;
+
+-- ON DELETE CASCADE
+-- on delete cascade is almost the same thing but instead of setting NULL
+-- this will delete the entire row in the database.
+
+CREATE TABLE branch_supplier(
+    branch_id INT,
+    supplier_name VARCHAR(40),
+    supply_type VARCHAR(40),
+    PRIMARY KEY(branch_id, supplier_name),
+    FOREIGN KEY(branch_id) REFERENCES branch(branch_id) ON DELETE CASCADE
+);
+
+DELETE FROM branch
+WHERE branch_id = 2;
+
+SELECT *
+FROM branch_supplier;
+
+-- NOTE: i) Only foreign keys should have NULL value wherease primary key
+-- can't be set to NULL value. You just have to delete the entire thing. 
